@@ -7,8 +7,8 @@
   <script src="./index.js" defer></script>
 </head>
 <body>
-  <button class="login-button">Log in</button>
-  <button class="signup-button">Sign up</button>
+  <a href="./login.php"><button class="login-button">Log in</button></a>
+  <a href="./signup.php"><button class="signup-button">Sign up</button></a>
 </body>
 </html>
 
