@@ -1,3 +1,7 @@
+<?php
+  include("database.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,4 +26,29 @@
 
 <?php
   // action attribute in the form html sends the form data to the specified path
+  // create a new row in database
+
+  if($_SERVER["REQUEST_METHOD"] == "POST") {
+    // filter username and password
+
+    $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
+    $password = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
+
+    if(empty($username) && empty($password)) {
+      echo "Please enter a username and password";
+    } else if(empty($username)) {
+      echo "Please enter a username";
+    } else if(empty($password)) {
+      echo "Please enter a password";
+    } else {
+      $hash = password_hash($password, PASSWORD_DEFAULT);
+      $sql = "INSERT INTO users (user_name, user_password) 
+              VALUES ('$username', '$hash')";
+
+      mysqli_query($conn, $sql);
+      echo "You have successfully created an account!";
+    }
+  }
+
+  mysqli_close($conn);
 ?>

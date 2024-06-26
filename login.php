@@ -1,3 +1,7 @@
+<?php
+  include("database.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,4 +24,5 @@
 
 <?php
   // action attribute in the form html sends the form data to the specified path
+  // check if the account details is found in the database
 ?>
