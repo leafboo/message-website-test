@@ -43,7 +43,7 @@
     } else {
       $hash = password_hash($password, PASSWORD_DEFAULT);
       $sql = "INSERT INTO users (user_name, user_password) 
-              VALUES ('$username', '$hash')";
+              VALUES ('$username', '$hash');";
 
       mysqli_query($conn, $sql);
       echo "You have successfully created an account!";
