@@ -16,17 +16,12 @@
   </form>
 </body>
 </html>
+<?php
+   
+?>
 
 <?php
-  if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["message"])) {
-    $message = $_POST["message"]; 
-    $sqlPost = "INSERT INTO messages (chat_message)
-                VALUES ('$message');";
-    mysqli_query($conn, $sqlPost);
-  } else {
-    echo "Input box is empty! <br>";
-  }
-
+  // Used for getting message and displaying
   $sqlGet = "SELECT * FROM messages;";
   $result = mysqli_query($conn, $sqlGet);
   $resultCheck = mysqli_num_rows($result);
@@ -38,8 +33,16 @@
   } else {
     echo "No chat messages found.";
   }
-  
-  
-  
+
+  // Used for sending message 
+  if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["message"])) {
+    $message = $_POST["message"]; 
+    
+    $sqlPost = "INSERT INTO messages (chat_message)
+                VALUES ('{$message}');";
+    mysqli_query($conn, $sqlPost);
+    header("Location: " . $_SERVER["REQUEST_URI"]);
+    exit();
+  } 
   mysqli_close($conn);
 ?>
