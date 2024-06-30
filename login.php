@@ -25,4 +25,36 @@
 <?php
   // action attribute in the form html sends the form data to the specified path
   // check if the account details is found in the database
+
+  if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
+
+    if(empty($username)) {
+      echo "Please enter a username";
+    } else if(empty($password)) {
+      echo "Please enter your password";
+    } else {
+
+      $sqlGet = "SELECT * FROM users WHERE user_name = '$username' LIMIT 1";
+      $result = mysqli_query($conn, $sqlGet);
+      
+      if(mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        $dbPassword = $row["user_password"];
+
+        if(password_verify($password, $dbPassword)) {
+          echo "user found!";
+        } else {
+          echo "Passwords do not match!";
+        }
+      } else {
+        echo "Could not find user!";   
+      }
+
+    }
+    
+    
+  }
+  mysqli_close($conn);
 ?>

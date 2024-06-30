@@ -32,14 +32,15 @@
     // filter username and password
 
     $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
-    $password = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
+    $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
+    $reEnterPassword = filter_input(INPUT_POST, "reEnterPassword", FILTER_SANITIZE_SPECIAL_CHARS);
 
-    if(empty($username) && empty($password)) {
-      echo "Please enter a username and password";
-    } else if(empty($username)) {
+    if(empty($username)) {
       echo "Please enter a username";
     } else if(empty($password)) {
       echo "Please enter a password";
+    } else if($password != $reEnterPassword) {
+      echo "Passwords do not match!";
     } else {
       $hash = password_hash($password, PASSWORD_DEFAULT);
       $sql = "INSERT INTO users (user_name, user_password) 
