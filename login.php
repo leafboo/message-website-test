@@ -44,7 +44,8 @@
         $dbPassword = $row["user_password"];
 
         if(password_verify($password, $dbPassword)) {
-          echo "user found!";
+          header("Location: home-page.php");
+          exit();
         } else {
           echo "Passwords do not match!";
         }
