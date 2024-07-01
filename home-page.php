@@ -9,11 +9,13 @@
   <title>Document</title>
 </head>
 <body>
+  <a href="index.php"><button>Log out</button></a>
   <form action="home-page.php" method="post">
     Say something... <br>
     <input type="text" name="message">
     <input type="submit" name="submit">
   </form>
+  
 </body>
 </html>
 <?php
